@@ -35,6 +35,14 @@ class MainViewModel(
             )
         }
     }
+    fun clearUserData(){
+        viewModelScope.launch(Dispatchers.IO) {
+            getUserUseCase().fold(
+                { responseError(it) },
+                { responseGetUserSuccess(it) }
+            )
+        }
+    }
 
     private fun responseError(errorApp: ErrorApp) {
 
@@ -47,6 +55,8 @@ class MainViewModel(
     private fun responseGetUserSuccess(user: User) {
         _uiState.postValue(UiState(user = user))
     }
+
+
 
     data class UiState(
         val errorApp: ErrorApp? = null,

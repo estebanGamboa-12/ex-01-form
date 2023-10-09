@@ -6,6 +6,7 @@ import com.iesam.androidtrainning.domain.SaveUserUseCase
 import com.iesam.androidtrainning.domain.User
 import com.iesam.androidtrainning.domain.UserRepository
 import com.iesam.kotlintrainning.Either
+import com.iesam.kotlintrainning.right
 
 class UserDataRepository(private val localDataSource: XmlLocalDataSource) : UserRepository {
 
@@ -15,5 +16,9 @@ class UserDataRepository(private val localDataSource: XmlLocalDataSource) : User
 
     override fun obtain(): Either<ErrorApp, User> {
         return localDataSource.findUser()
+    }
+    fun clearUserData(): Either<ErrorApp, Unit> {
+        localDataSource.clearUserData()
+        return Unit.right()
     }
 }

@@ -27,6 +27,14 @@ class XmlLocalDataSource(private val context: Context) {
             ErrorApp.UnknowError.left()
         }
     }
+    fun clearUserData() {
+        sharedPref.edit().apply {
+            remove("id")
+            remove("username")
+            remove("surname")
+            apply()
+        }
+    }
 
     fun findUser(): Either<ErrorApp, User> {
         return try {

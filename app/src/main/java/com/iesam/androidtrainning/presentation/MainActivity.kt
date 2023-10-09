@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
     val viewModel: MainViewModel by lazy {
         MainViewModel(
             SaveUserUseCase(UserDataRepository(XmlLocalDataSource(this))),
-            GetUserUseCase(UserDataRepository(XmlLocalDataSource(this)))
+            GetUserUseCase(UserDataRepository(XmlLocalDataSource(this))),
+
         )
     }
 
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         val cleanButton=findViewById<Button>(R.id.action_clean)
         cleanButton.setOnClickListener {
             viewModel.saveUser("","")
+            viewModel.clearUserData()
             clearInputs()
         }
     }
